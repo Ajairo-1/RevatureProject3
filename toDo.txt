@@ -1,0 +1,45 @@
+This file is organized in no particular order
+
+- create objects and their respective fields
+   • will have two plans, Plan A and Plan B
+   • Plan A: Liabiliities (cheapest)
+   • Plan B: Full Coverage (Most Expensive)
+   • should have View and Edit buttons per Plan
+
+- create lookup relationship(s), junction objects, and all relationship needed
+   for objs
+
+- create home page. this should include
+   • component for login button
+   • component to display an vehicle image on the home page
+   • a component for a nav panel for the top of the page
+   • component for the FAQ link that should link to another page 
+   • component for implementation of live chat agent
+   • should have a component section for 'getting a quote'
+      this should have a dropdown for all 50 states
+
+- create login page; should encompass login func for Customer and Partner user
+  • should already be made by pasting the link into addr bar
+
+- create customer and partner community users
+  • give these users the correct license
+  • ensure these users can login via different credentials
+  • when external user makes account, should be given Customer Community User
+    - reference Contact obj fields when user is creating Profile
+
+- create wizard for a non-user to create a profile/account
+  • should have functionality to be able to save when getting to certain point
+  • wizard will be multiple steps
+      Personal Info, Vehicles, Drivers, Driving History, Additional Info, Quote,
+       Driver Details, Policy & Vehicle Information
+
+- create lightning components for peripheal pages
+
+- incorpate FAQ pages that give information to a user and/or external
+   this will be the Knowledge articles
+   also incorporate the Live Agent chat in Communities portal
+
+
+THINK ABOUT...
+incoporate if you had more time what would you like to implement
+how are you going about delegating tasks
