@@ -1,5 +1,48 @@
 This file is organized in no particular order
 
+THIS is what is needed for a barebones working presentation/product...
+  1. QUOTE
+  2. LOG IN FUNCTIONALITY -> (afterwards, Social Media Log-In)
+  3. PURCHASING FUNCIONALITY 
+  4. REPORTS
+-------------------------------------------------------------------------------
+THINGS THAT HAVE BEEN DONE:
+  Added Customer and Partner user Profiles to selected Profiles
+   via Workspaces>Administration>Members
+
+  -create home page. this should include:
+   •login button (this is already included in Communities by default)
+   • component to display an vehicle image on the home page
+   • a component for a nav panel for the top of the page
+   • component for the FAQ link that should link to another page 
+
+-------------------------------------------------------------------------------
+HOW TO:
+  Partner
+    to create Partner user in Community:
+     Make a contact associated w/ an Account
+     ¿This contact should be a user?
+     This contact should have a Role in the Role Hierarchy
+     Go to the Account, click contact detail page & 'Enable as Partner User'
+
+  Customer
+    to create Customer user in Community:
+     Make a contact; attach Contact to an Account that has an Account Owner 
+      that is also assigned a role.
+------------------------------E: HOW TO --------------------------------------
+------------------------E: THINGS THAT HAVE BEEN DONE--------------------------
+TO DO:
+  - create home page. this should include
+          • component for implementation of live chat agent
+     • should have a component section for 'getting a quote'
+        this should have a dropdown for all 50 states
+
+  Questions for Arun:
+  -how to integrate Social Media w/ log-in
+  -is there a way to for a user to set a pw w/out using their email?
+  -pages
+-------------------------------------------------------------------------------
+
 - create objects and their respective fields
    • will have two plans, Plan A and Plan B
    • Plan A: Liabiliities (cheapest)
@@ -9,14 +52,6 @@ This file is organized in no particular order
 - create lookup relationship(s), junction objects, and all relationship needed
    for objs
 
-- create home page. this should include
-   • component for login button
-   • component to display an vehicle image on the home page
-   • a component for a nav panel for the top of the page
-   • component for the FAQ link that should link to another page 
-   • component for implementation of live chat agent
-   • should have a component section for 'getting a quote'
-      this should have a dropdown for all 50 states
 
 - create login page; should encompass login func for Customer and Partner user
   • should already be made by pasting the link into addr bar
@@ -24,7 +59,7 @@ This file is organized in no particular order
 - create customer and partner community users
   • give these users the correct license
   • ensure these users can login via different credentials
-  • when external user makes account, should be given Customer Community User
+    • when external user makes account, should be given Customer Community User
     - reference Contact obj fields when user is creating Profile
 
 - create wizard for a non-user to create a profile/account

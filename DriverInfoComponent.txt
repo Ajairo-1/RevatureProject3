@@ -1,0 +1,71 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId">
+    <aura:attribute name="newDriver" type="Object"/>
+    <aura:attribute name="simpleDriver" type="Object"/>
+    <aura:attribute name="newDriverError" type="String"/>
+    <aura:registerEvent name="driverEvent" type="c:QuoteActionEvent"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <h1>Enter Driver Information</h1>
+    <div>
+        <lightning:card iconName="action:new_contact" title="Driver Information">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col"></div>
+                <lightning:recordEditForm aura:id="recordViewForm" objectApiName="Contact">
+                    <lightning:messages />
+                    <div class="slds-grid  slds-wrap slds-grid_vertical-align-end">
+                        <div class="slds-col slds-size_1-of-4">		
+                            <lightning:inputField fieldName="FirstName"/>                       
+                        </div>
+                        <div class="slds-col slds-size_1-of-4">
+                            <lightning:inputField fieldName="LastName" required=""/>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2"></div>
+                        <div class="slds-col slds-size_1-of-6">
+                            <lightning:inputField fieldName="Birthdate"/>            
+                        </div>
+                        <div class="slds-col slds-size_1-of-4">
+                            <lightning:inputField fieldName="Email"/>            
+                        </div>                        
+                        <div class="slds-col slds-size_1-of-1"></div>
+                        <div class="slds-col slds-size_1-of-4">
+                            <lightning:input aura:id="contactField" label="Driver License Number" value="{!v.simpleDriver.license}"/>            
+                        </div>
+                        <div class="slds-col slds-size_1-of-6">
+                            <lightning:inputField fieldName="Issued_Date__c"/>            
+                        </div> 
+                        <div class="slds-col slds-size_1-of-6">
+                            <lightning:inputField fieldName="Issued_State__c"/>            
+                        </div>
+                        <div class="slds-col slds-size_1-of-1"></div>                    
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning:inputField fieldName="MailingStreet"/>            
+                        </div>
+                        <div class="slds-col slds-size_1-of-1"></div>            
+                        <div class="slds-col slds-size_1-of-8">
+                            <lightning:inputField fieldName="MailingCity"/>            
+                        </div> 
+                        <div class="slds-col slds-size_1-of-8">
+                            <lightning:inputField fieldName="MailingState"/>            
+                        </div>
+                        <div class="slds-col slds-size_1-of-8">
+                            <lightning:inputField fieldName="MailingPostalCode"/>            
+                        </div>                      
+                    </div>
+                    <div class="slds-col"></div>                
+                </lightning:recordEditForm>
+            </div> <br/>
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col">
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_1-of-24"></div>
+                        <div class="slds-col slds-size_1-of-4">
+                            <lightning:button label="Next" onclick="{!c.goNext}"/> <br/><br/> 
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col"></div>
+            </div>
+        </lightning:card>  
+    </div>
+    
+</aura:component>
