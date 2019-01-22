@@ -74,6 +74,14 @@ TO DO:
    this will be the Knowledge articles
    also incorporate the Live Agent chat in Communities portal
 
+- allow user to be able to login when account has been created
+
+- user should be able to edit a quote
+- should be able to view coverage breakdown
+- should be able to edit coverage to make adjustments to policy
+
+Incident
+- should be able to edit/update driver information to keep account up to doate
 
 THINK ABOUT...
 incoporate if you had more time what would you like to implement
