@@ -9,20 +9,12 @@
         ); */
     },
     handleOnload : function(component, event) {
-        var driverState = component.get("v.driverState");
-        
-        console.log("In DriverInfoComponent handleOnload.");
-        console.log(component.get("v.driverState"));
-  //      component.set("v.MailingState", "v.driverState");
- //       component.find("theState").set("v.value", driverState);
-        console.log('----> onload');
+        console.log('DriverComponent ----> onload');
         var rec = event.getParam("recordUi");
-        //        var name = component.find("firstname").set("v.value", "matt");
-//        console.log('recordUi ' + rec.record.firstname);
     },
     
     handleOnsubmit : function(component, event) {
-        console.log('---> onsubmit');
+        console.log('DriverComponent ---> onsubmit');
         event.preventDefault();
         var recui = event.getParam("recordUi");
         var fields = event.getParam("fields");
@@ -31,7 +23,7 @@
     },
     
     handleOnsuccess : function(component, event) {
-        console.log('---> onSuccess');
+        console.log('DriverComponent ---> onSuccess');
         var record = event.getParam("response");
         if(record !== null) {
             console.log("record is not null " + record.id);
@@ -44,7 +36,7 @@
     },
     
     handleOnerror : function(component, event) {
-        console.log('---> onError');
+        console.log('DriverComponent ---> onError');
     },
     
     goNext : function(component, event, helper) {

@@ -1,14 +1,80 @@
-<aura:component >
-    <aura:attribute name="driverID" type="ID"/>
-    <!--    <p>new driver id is {!v.driverID}</p> -->
-    <div class="slds-p-bottom_large slds-p-left_large" style="width:500px">
-        <aura:if isTrue="{!not(empty(v.driverID))}">
-            <lightning:recordViewForm recordId="{!v.driverID}" objectApiName="Contact">
-                <div class="slds-box">
-                    <lightning:outputField fieldName="FirstName" />
-                    <lightning:outputField fieldName="LastName" />
-                </div>
-            </lightning:recordViewForm>            
-        </aura:if>        
+<aura:component controller="QuoteWizardApexController">
+    <aura:attribute name="stateId" type="ID" default="a0M1U000000MSyqUAG"/>
+    <aura:attribute name="driverId" type="ID" default="0031U000007BGsEQAW"/>
+    <aura:attribute name="vehicleId" type="ID" default="a031U000004BkPpQAK"/>
+    <aura:attribute name="drivingRecordId" type="ID" default="a0L1U000000MpuvUAC"/>
+    <aura:attribute name="coverageId" type="ID"/>
+    <aura:registerEvent name="coverageEvent" type="c:CoverageActionEvent"/>    
+    
+    <!--    <p>{!v.stateId}</p>
+    <p>driverID is {!v.driverId}</p>
+    <p>vehicleId is {!v.vehicleId}</p>
+    <p>{!v.drivingRecordId}</p>	-->
+    <div class="slds-p-bottom_large slds-p-left_large" >
+        <!--        <aura:if isTrue="{!and(not(empty(v.driverId)), not(empty(v.vehicleId)))}"> -->
+        <div class="slds-grid slds-grid_align-space">
+            <div class="slds-col slds-size_1-of-4">
+                <lightning:button name="quote" onclick="{!c.getQuote}" label="Get Quote"/>
+            </div>
+        </div> <br/>
+        <div class="slds-grid slds-wrap slds-gutters">
+            <div class="slds-col slds-size_1-of-3">
+                <h1 class="slds-text-heading_small">Driver Information</h1>
+                <p></p>
+                <lightning:recordEditForm recordId="{!v.driverId}"
+                                          objectApiName="Contact"
+                                          >
+                    <div class="slds-box">
+                        <lightning:outputField fieldName="FirstName" />
+                        <lightning:outputField fieldName="LastName" />
+                        <lightning:outputField fieldName="Age__c"/>
+                        <lightning:outputField fieldName="Gender__c"/>                    
+                        <lightning:outputField fieldName="Driver_License__c"/>
+                        <lightning:outputField fieldName="Issued_State__c"/>
+                        <lightning:outputField fieldName="Issued_Date__c"/>
+                        <lightning:outputField fieldName="MailingStreet"/> 
+                        <lightning:outputField fieldName="MailingState"/>                    
+                        <lightning:outputField fieldName="MailingCity"/>                    
+                        <lightning:outputField fieldName="MailingPostalCode"/>                                        
+                    </div>
+                </lightning:recordEditForm>                    
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <div class="slds-col slds-size_1-of-1">
+                        <h1 class="slds-text-heading_small">Vehicle Information</h1>
+                        <lightning:recordEditForm recordId="{!v.vehicleId}" 
+                                                  objectApiName="Vehicle__c"
+                                                  onload="{!c.handleOnload}">
+                            <div class="slds-box">
+                                <lightning:outputField fieldName="Year__c" />
+                                <lightning:outputField fieldName="Make__c" />
+                                <lightning:outputField fieldName="Model__c"/>
+                                <lightning:outputField fieldName="Type__c"/>                    
+                                <lightning:outputField fieldName="Primary_Use__c"/>                                       
+                            </div>
+                        </lightning:recordEditForm> 
+                    </div>       
+                    <div class="slds-col slds-size_1-of-1"></div>
+                    <div class="slds-col slds-size_1-of-1">
+                        <h1 class="slds-text-heading_small">Driving History</h1>
+                        <lightning:recordEditForm recordId="{!v.drivingRecordId}" 
+                                                  objectApiName="Traffic_Violation_Record__c"
+                                                  >
+                            <div class="slds-box">
+                                <lightning:outputField fieldName="Speeding__c" />
+                                <lightning:outputField fieldName="Accident__c" />
+                                <lightning:outputField fieldName="DUI__c"/>
+                            </div>
+                        </lightning:recordEditForm> 
+                    </div>        
+                </div>            
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                <c:CoverageSummaryComponent basicPlanId="{!v.coverageId}"/>
+            </div>
+        </div>
+        
+        <!--        </aura:if> -->
     </div>    
 </aura:component>

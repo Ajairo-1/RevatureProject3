@@ -1,4 +1,4 @@
-<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" >
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId">
     <aura:attribute name="vehicleId" type="ID"/>
     <aura:attribute name="newVehicleError" type="String"/>
     <aura:registerEvent name="vehicleEvent" type="c:QuoteActionEvent"/>

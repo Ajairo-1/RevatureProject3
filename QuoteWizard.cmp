@@ -1,9 +1,10 @@
 <aura:component implements="force:appHostable,flexipage:availableForRecordHome,forceCommunity:availableForAllPageTypes,force:hasRecordId" access="global" >
     <aura:attribute name="dstate" type="String" />
-    <aura:attribute name="currentStep" type="String" default="1"/>
-    <aura:attribute name="driver" type="Map" />
-    <aura:attribute name="vehicle" type="Object"/>
+    <aura:attribute name="currentStep" type="String" default="step0"/>
+    <aura:attribute name="newStateId" type="ID" />
     <aura:attribute name="newDriverId" type="ID"/> 
+    <aura:attribute name="newVehicleId" type="ID"/>
+    <aura:attribute name="newRecordId" type="ID"/>  
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
     <aura:handler name="getQuoteEvent" event="c:QuoteActionEvent" action="{!c.handleComponentEvent}"/>
     <aura:handler name="vehicleEvent" event="c:QuoteActionEvent" action="{!c.handleComponentEvent}"/>
@@ -22,10 +23,10 @@
     
     <div aura:id="getQuoteDiv">
         <c:QuoteButtonComponent aura:id="getQuotePath"/>
-    </div>  
+    </div>
     
     <div aura:id="driverDiv">
-        <c:DriverInfoComponent aura:id="driver" driverState="{!v.State}"/>
+        <c:DriverInfoComponent aura:id="driver" />
     </div>    
     <div aura:id="vehicleDiv">
         <c:VehicleInfoComponent aura:id="vehicle"/>
@@ -35,6 +36,9 @@
     </div>
     <div aura:id="quoteSummaryDiv">
         <!--        <p>From parents, new id is {!v.newDriverId}</p> -->
-        <c:QuoteSummaryComponent aura:id="summary" driverID="{!v.newDriverId}"/>
+        <c:QuoteSummaryComponent aura:id="summary" stateId="{!v.newStateId}" 
+                                 				   driverId="{!v.newDriverId}" 
+                                 				   vehicleId="{!v.newVehicleId}" 
+                                 				   drivingRecordId="{!v.newRecordId}"/>
     </div>
 </aura:component>

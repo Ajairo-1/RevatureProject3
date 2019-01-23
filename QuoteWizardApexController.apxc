@@ -1,0 +1,110 @@
+public class QuoteWizardApexController {
+    
+    @AuraEnabled
+    public static ID getInsuranceQuote(ID stateId, ID newContactId, ID newVehicleId, ID violationId) {
+        
+        if(newContactId != null) {
+            System.debug('the new contact is not null ' + newContactId + ' ' +
+                         'state id ' + stateId + ' ' + ' veid ' + newVehicleId + ' vioid ' + violationId);
+        }
+        Coverage__c myCoverage = calculateQuote(stateId, newContactId, newVehicleId, violationId);
+        System.debug('the coverage id is -----> ' + myCoverage.id + ' <---- the basic coverage is ' + myCoverage.Bodily_Injury_Liability__c + ' ' 
+                     + myCoverage.Property_Damage_Liability__c + ' and the rate is ' + myCoverage.Coverage_Rate__c);
+        return myCoverage.Id;
+    }
+    
+    
+    private static Coverage__c calculateQuote(Id stId, Id drId, Id veId, Id vioId) {
+        State__c st = [SELECT Id, state_rate__c FROM State__c WHERE Id = :stId LIMIT 1];
+        Contact drv = [SELECT Id, FirstName, LastName, Gender__c, Age__c, Years_Driving__c
+                       FROM Contact 
+                       WHERE Id = :drId
+                       LIMIT 1];
+        Vehicle__c ve = [SELECT Id, Year__c, Make__c, Model__c, Type__c, Primary_Use__c
+                         FROM Vehicle__c
+                         WHERE Id = :veId
+                         LIMIT 1];        
+        Traffic_Violation_Record__c trfVr = [SELECT Id, accident__c, dui__c, speeding__c
+                                             FROM Traffic_Violation_Record__c
+                                             WHERE Id = :vioId
+                                             LIMIT 1]; 
+        Integer inGroup = identifyGroup(drv, ve, trfVr);
+        System.debug('inGroup value is ' + inGroup);
+        Integer baseRate = calculateBaseRate(st, inGroup);
+        
+        Coverage__c basicCoverage = new Coverage__c(Bodily_Injury_Liability__c='$25,000 - $50,000',Property_Damage_Liability__c='$10,000');
+        Double bilRate = baseRate * 0.11;
+        Double pdlRate = baseRate * 0.02;
+        Double pipRate = baseRate * 0.1;
+        basicCoverage.Coverage_Rate__c = bilRate + pdlRate + pipRate;
+        insert basicCoverage;
+        
+        Coverage__c premiumCoverage = new Coverage__c(Bodily_Injury_Liability__c='$100,000 - $300,000', Property_Damage_Liability__c='$50,000',
+                                                     Personal_Injury_Protection__c='$50,000/person/$200 deductible',
+                                                      Additional_Personal_Injury_Protection__c='$50,000 limit/2k monthly work loss',
+                                                      Uninsured_Motorist__c='$100,000 - $300,000', Comprehensive__c='$100 deductible',
+                                                      Collision__c='$100', Emergency_Road_Service__c=true, Rental_Reimbursement__c='$50/day, $1500 max');
+        bilRate = baseRate * 0.2;
+        pdlRate = baseRate * 0.1;
+        pipRate = baseRate * 0.15;
+        Double obelRate = baseRate * 0.01;
+        Double apipRate = baseRate * 0.02;
+        Double umRate = baseRate * 0.05;
+        
+        return basicCoverage;
+    }
+    
+    private static Integer identifyGroup(Contact c, Vehicle__c v, Traffic_Violation_Record__c tvr) {
+        integer count = 0;
+        if ((c != null && v != null) && tvr != null) {
+            System.debug('in identifyGroup');
+            count = (c.Gender__c == 'Female') ? 2 : 4;
+            
+            if(c.years_driving__c <= 5) { count += 4; }
+            else if (c.years_driving__c > 5 && c.years_driving__c <= 10) { count += 3; }
+            else if (c.years_driving__c > 11 && c.years_driving__c <= 20) { count += 2; }
+            else { count += 1; }
+            
+            if(v.Type__c == 'Sport') { count += 4; }
+            else if(v.Type__c == 'Truck') { count += 3; }
+            else if(v.Type__c == 'Sedan') { count += 2; }
+            else { count += 1; }
+            
+            if(v.Primary_Use__c == 'Business') { count += 6; }
+            else if(v.Primary_Use__c == 'Commute') { count += 4; }
+            else { count += 2; }
+            
+            if(tvr.accident__c == '3+') { count += 8; }
+            else if(tvr.Accident__c == '2') { count += 7; }
+            else if(tvr.Accident__c == '1') { count += 4; }
+            else { count += 1; }
+            
+            if(tvr.Speeding__c == '4+') { count += 8; }
+            else if(tvr.Speeding__c == '3') { count += 7; }
+            else if(tvr.Speeding__c == '2') { count += 5; }            
+            else if(tvr.Speeding__c == '1') { count += 3; }
+            else { count += 1; }
+            
+            if(tvr.DUI__c == '2+') { count += 8; }
+            else if(tvr.DUI__c == '1') { count += 6; }
+            else { count += 1; }   
+        }
+        return count;
+    }
+    
+    private static Integer calculateBaseRate(State__c s, Integer pt) {
+        System.debug('in calculateBaseRate');
+        
+        Decimal rate = s.state_rate__c;
+        if(pt >= 10 && pt <= 16) { rate = rate - (rate * 0.2); }
+        if(pt >= 17 && pt <= 22) { rate = rate - (rate * 0.1); }
+        if(pt >= 23 && pt <= 28) { rate = rate + (rate * 0.1); }
+        if(pt >= 29 && pt <= 34) { rate = rate + (rate * 0.2); }
+        if(pt >= 35 && pt <= 40) { rate = rate + (rate * 0.4); }
+        return (Integer)rate;
+    }
+    
+    private static void setRelationship(ID driverId, ID vehicleId) {
+        Vehicle_Driver__c veDr = new Vehicle_Driver__c(driver__c=driverId, vehicle__c=vehicleId);
+    }
+}

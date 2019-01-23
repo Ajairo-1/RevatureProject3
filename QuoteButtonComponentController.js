@@ -1,0 +1,46 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,lightning:isUrlAddressable" access="global">
+    <aura:attribute name="StateID" type="ID"/>
+    <aura:registerEvent name="getQuoteEvent" type="c:QuoteActionEvent"/>
+
+    <!--<aura:attribute name="" type="" />-->
+    <div>
+        <!--used to apply a stylized container around a grouping of information -->
+        <lightning:card variant="Narrow" iconName="" title="Get Quote" footer="" >
+            <div class="slds-grid slds-gutters">
+                
+            </div>
+            <div style="position: absolute;"> 
+                <p>Please enter the State of your choice and continue to get insurance for your vehicle!</p>
+            </div>
+            <div class="slds-col" ></div>
+            <div>
+                <lightning:layout horizontalAlign="center">
+                    <lightning:layoutItem size="8">
+                        <!-- when of type 'submit' there is stndrd functionality that submits to db -->
+                        <lightning:recordEditForm aura:id="quoteForm"
+                                                  objectApiName="State__c"
+                                                  recordId="{!v.driverId}"
+                                                  onsubmit="{!c.handleOnsubmit}"
+                                                  onsuccess="{!c.handleOnsuccess}"
+                                                  onerror="{!c.handleOnerror}">
+                            <lightning:inputField fieldName="theStates__c" />
+                            <div class="slds-col slds-size_1-of-8">
+                                <lightning:button aura:id="submit" type="submit" label="Next" class="slds-m-top_medium" />                                    
+                            </div>
+                            <!--
+                            <div class="slds-grid slds-wrap slds-veritcal-align-end">
+                                <div class="slds-col slds-size_1-of-3">
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <lightning:navigation aura:id="navService"/>
+                                    <lightning:button label="Get Quote" onclick="{!c.getQuote}"/>
+                                </div>
+                            </div> -->
+                        </lightning:recordEditForm>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </div>
+            <lightning:messages />
+        </lightning:card>
+    </div>
+</aura:component>

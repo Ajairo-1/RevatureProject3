@@ -2,8 +2,8 @@
     doInit: function(component, event, helper) {
         // Prepare a new record from template
         
-        //    var getQuoDiv = component.find("getQuoteDiv");
-        //    $A.util.addClass(getQuoDiv,'toggle');
+//        var getQuoDiv = component.find("getQuoteDiv");
+//        $A.util.addClass(getQuoDiv,'toggle');
         var driverDiv = component.find("driverDiv");
         $A.util.addClass(driverDiv, 'toggle'); 
         var vehicleDiv = component.find("vehicleDiv");
@@ -20,15 +20,12 @@
         console.log(component.get("v.State"));
         console.log("capture the action " + myAction);
         component.set("v.message", myAction);
-        
-        
-        var quoDiv;
-        
+               
+        var quoDiv;        
         var vehDiv;
         var drvDiv;
         var drvRecDiv;
-        var summDiv;
-        
+        var summDiv;        
         if(myAction==="getQuotePath") {
             //     quoDiv = component.find("getQuoteDiv");
             //     $A.util.addClass(quoDiv, 'toggle');
@@ -44,10 +41,16 @@
             console.log(component.get("v.State"));
             //var step = component.get("v.currentStep");
             component.set("v.currentStep", "step0");
-            
-            
         }
-        if(myAction==="driver") { 
+        if(myAction==="driver") {
+            var obj = event.getParam("componentObject");
+            if(obj !== null && obj !== undefined) {
+                //  console.log("the driver is " + obj.fields.FirstName.value);
+                console.log("in driver action, and state id is------------> " + obj.id);
+                component.set("v.newStateId", obj.id);
+ //               component.set("v.driver", obj);
+                console.log("after set attribute");
+            }             
             console.log("in myAction = driver");
             console.log(component.get("v.dstate"));
             quoDiv = component.find("getQuoteDiv");
@@ -66,13 +69,11 @@
             var obj = event.getParam("componentObject");
             if(obj !== null && obj !== undefined) {
                 //  console.log("the driver is " + obj.fields.FirstName.value);
-                console.log(typeof(obj));
+                console.log("in vehicle action, and driver id is------------> " + obj.id);
                 component.set("v.newDriverId", obj.id);
-                component.set("v.driver", obj);
+//                component.set("v.driver", obj);
                 console.log("after set attribute");
-            }
-            console.log(component.get("v.driver.id"));
-            console.log(component.get("v.driver.fields.FirstName.value"));            
+            }         
             
             vehDiv = component.find("driverDiv");
             $A.util.addClass(vehDiv, 'toggle');
@@ -84,6 +85,14 @@
             component.set("v.currentStep", "step2");
         }
         if(myAction==="driving record") {
+            var obj = event.getParam("componentObject");
+            if(obj !== null && obj !== undefined) {
+                //  console.log("the driver is " + obj.fields.FirstName.value);
+                console.log("in vehicle action, and vehicle id is------------> " + obj.id);
+                component.set("v.newVehicleId", obj.id);
+                console.log(component.get("v.newVehicleId"));
+                console.log("after set attribute");
+            }            
             vehDiv = component.find("driverDiv");
             $A.util.addClass(vehDiv, 'toggle');
             vehDiv = component.find("vehicleDiv");
@@ -94,10 +103,14 @@
             component.set("v.currentStep", "step3");            
         }
         if(myAction==="summary") {
-            //           vehDiv = component.find("driverDiv");
-            //           $A.util.addClass(vehDiv, 'toggle');
-            //           vehDiv = component.find("vehicleDiv");
-            //           $A.util.addClass(vehDiv, 'toggle');
+            var obj = event.getParam("componentObject");
+            if(obj !== null && obj !== undefined) {
+                //  console.log("the driver is " + obj.fields.FirstName.value);
+                console.log("in summary action, and drivingRecord id is------------> " + obj.id);
+                component.set("v.newRecordId", obj.id);
+                console.log(component.get("v.newVehicleId"));
+                console.log("after set attribute");
+            }            
             drvRecDiv = component.find("drivingRecordDiv");
             $A.util.addClass(drvRecDiv, 'toggle');
             summDiv = component.find("quoteSummaryDiv");
@@ -105,7 +118,7 @@
             // var step = component.get("v.currentStep");
             console.log("before log id ");
             console.log(component.get("v.newDriverId"));
-            component.set("v.currentStep", "step4");            
+            component.set("v.currentStep", "step4");
         }
     }
 })

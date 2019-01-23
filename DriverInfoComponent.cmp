@@ -1,10 +1,10 @@
-<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes">
-    <aura:attribute name="driverState" type="String" />
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId">
     <aura:attribute name="driverId" type="ID"/>
     <aura:attribute name="newDriverError" type="String"/>
     <aura:attribute name="lName" type="String"/>
     <aura:registerEvent name="driverEvent" type="c:QuoteActionEvent"/>
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+        
     <div>
         <lightning:card iconName="action:new_contact" title="Driver Information">
             <div class="slds-grid slds-gutters">
@@ -22,28 +22,31 @@
                             <lightning:inputField fieldName="FirstName"/>                       
                         </div>
                         <div class="slds-col slds-size_1-of-4">
-                            <lightning:inputField fieldName="LastName" required=""/>
+                            <lightning:inputField fieldName="LastName" required="true"/>
                         </div>
                         <div class="slds-col slds-size_1-of-2"></div>
                         <div class="slds-col slds-size_1-of-6">
-                            <lightning:inputField fieldName="Birthdate"/>            
+                            <lightning:inputField fieldName="Birthdate" required="true"/>            
                         </div>
                         <div class="slds-col slds-size_1-of-8">
-                            <lightning:inputField fieldName="Gender__c"/>            
+                            <lightning:inputField fieldName="Gender__c" required="true"/>            
                         </div>                        
                         <div class="slds-col slds-size_1-of-4">
                             <lightning:inputField fieldName="Email"/>            
                         </div>                        
                         <div class="slds-col slds-size_1-of-1"></div>
-                        <div class="slds-col slds-size_1-of-4">
+                        <div class="slds-col slds-size_1-of-6">
                             <lightning:inputField fieldName="Driver_License__c"/>            
                         </div>
-                        <div class="slds-col slds-size_1-of-6">
+                        <div class="slds-col slds-size_1-of-8">
                             <lightning:inputField fieldName="Issued_Date__c"/>            
                         </div> 
                         <div class="slds-col slds-size_1-of-6">
                             <lightning:inputField fieldName="Issued_State__c"/>            
                         </div>
+                        <div class="slds-col slds-size_1-of-12">
+                            <lightning:inputField fieldName="Years_Driving__c"/>            
+                        </div>                        
                         <div class="slds-col slds-size_1-of-1"></div>                    
                         <div class="slds-col slds-size_1-of-3">
                             <lightning:inputField fieldName="MailingStreet"/>            
@@ -53,7 +56,7 @@
                             <lightning:inputField fieldName="MailingCity"/>            
                         </div> 
                         <div class="slds-col slds-size_1-of-8">
-                            <lightning:inputField fieldName="MailingState" value="{!v.driverState}"/>            
+                            <lightning:inputField fieldName="MailingState"/>            
                         </div>
                         <div class="slds-col slds-size_1-of-8">
                             <lightning:inputField fieldName="MailingPostalCode"/>            
@@ -66,6 +69,7 @@
                     <div class="slds-col"></div>                
                 </lightning:recordEditForm>
             </div> <br/>
+            
             <div class="slds-grid slds-gutters">
                 <div class="slds-col">
                     <div class="slds-grid">
@@ -79,4 +83,5 @@
             </div> 
         </lightning:card>  
     </div>
+    
 </aura:component>

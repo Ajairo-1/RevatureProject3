@@ -1,0 +1,17 @@
+<aura:component >
+    <aura:attribute name="basicPlanId" type="ID"/>
+    <aura:attribute name="premiumPlanId" type="ID"/>
+    <!--   <aura:handler name="coverageEvent" event="c:CoverageActionEvent" action="{!c.handleCoverageEvent}"/> -->
+      
+    <h1 class="slds-text-heading_small">Basic Coverage</h1>
+    <lightning:recordEditForm recordId="{!v.basicPlanId}" 
+                              objectApiName="Coverage__c"
+                              >
+        <div class="slds-box">
+            <lightning:outputField fieldName="Bodily_Injury_Liability__c" />
+            <lightning:outputField fieldName="Property_Damage_Liability__c" />
+            <lightning:outputField fieldName="Coverage_Rate__c"/>
+        </div>
+    </lightning:recordEditForm> 
+    
+</aura:component>
