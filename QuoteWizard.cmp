@@ -1,0 +1,40 @@
+<aura:component implements="force:appHostable,flexipage:availableForRecordHome,forceCommunity:availableForAllPageTypes,force:hasRecordId" access="global" >
+    <aura:attribute name="dstate" type="String" />
+    <aura:attribute name="currentStep" type="String" default="1"/>
+    <aura:attribute name="driver" type="Map" />
+    <aura:attribute name="vehicle" type="Object"/>
+    <aura:attribute name="newDriverId" type="ID"/> 
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="getQuoteEvent" event="c:QuoteActionEvent" action="{!c.handleComponentEvent}"/>
+    <aura:handler name="vehicleEvent" event="c:QuoteActionEvent" action="{!c.handleComponentEvent}"/>
+    <aura:handler name="driverEvent" event="c:QuoteActionEvent" action="{!c.handleComponentEvent}"/>
+    <aura:handler name="drivingRecordEvent" event="c:QuoteActionEvent" action="{!c.handleComponentEvent}"/>
+    
+    <lightning:progressIndicator currentStep="{!v.currentStep}" type="path" hasError="false" variant="base">
+        
+        <lightning:progressStep label="Get Quote" value="step0"/>
+        
+        <lightning:progressStep label="Driver Information" value="step1"/>
+        <lightning:progressStep label="Vehicle Information" value="step2"/>
+        <lightning:progressStep label="Driving Record" value="step3"/>
+        <lightning:progressStep label="Quote Summary" value="step4"/>
+    </lightning:progressIndicator>
+    
+    <div aura:id="getQuoteDiv">
+        <c:QuoteButtonComponent aura:id="getQuotePath"/>
+    </div>  
+    
+    <div aura:id="driverDiv">
+        <c:DriverInfoComponent aura:id="driver" driverState="{!v.State}"/>
+    </div>    
+    <div aura:id="vehicleDiv">
+        <c:VehicleInfoComponent aura:id="vehicle"/>
+    </div>
+    <div aura:id="drivingRecordDiv">
+        <c:DrivingRecordComponent aura:id="drivingRecord"/>
+    </div>
+    <div aura:id="quoteSummaryDiv">
+        <!--        <p>From parents, new id is {!v.newDriverId}</p> -->
+        <c:QuoteSummaryComponent aura:id="summary" driverID="{!v.newDriverId}"/>
+    </div>
+</aura:component>

@@ -1,0 +1,14 @@
+<aura:component >
+    <aura:attribute name="driverID" type="ID"/>
+    <!--    <p>new driver id is {!v.driverID}</p> -->
+    <div class="slds-p-bottom_large slds-p-left_large" style="width:500px">
+        <aura:if isTrue="{!not(empty(v.driverID))}">
+            <lightning:recordViewForm recordId="{!v.driverID}" objectApiName="Contact">
+                <div class="slds-box">
+                    <lightning:outputField fieldName="FirstName" />
+                    <lightning:outputField fieldName="LastName" />
+                </div>
+            </lightning:recordViewForm>            
+        </aura:if>        
+    </div>    
+</aura:component>
