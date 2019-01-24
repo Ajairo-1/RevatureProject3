@@ -3,8 +3,8 @@
     <aura:attribute name="driverId" type="ID" default="0031U000007BGsEQAW"/>
     <aura:attribute name="vehicleId" type="ID" default="a031U000004BkPpQAK"/>
     <aura:attribute name="drivingRecordId" type="ID" default="a0L1U000000MpuvUAC"/>
-    <aura:attribute name="coverageId" type="ID"/>
-    <aura:registerEvent name="coverageEvent" type="c:CoverageActionEvent"/>    
+    
+    <aura:registerEvent name="coverageEvent" type="c:QuoteActionEvent"/>    
     
     <!--    <p>{!v.stateId}</p>
     <p>driverID is {!v.driverId}</p>
@@ -70,9 +70,7 @@
                     </div>        
                 </div>            
             </div>
-            <div class="slds-col slds-size_1-of-3">
-                <c:CoverageSummaryComponent basicPlanId="{!v.coverageId}"/>
-            </div>
+            
         </div>
         
         <!--        </aura:if> -->

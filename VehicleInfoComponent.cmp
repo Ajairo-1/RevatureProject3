@@ -40,7 +40,7 @@
                     </div>                    
                 </div> <br/>                
             </lightning:recordEditForm> 
-            
+<!--            
             <div class="slds-grid slds-gutters">
                 <div class="slds-col slds-size_3-of-8"></div>
                 <div class="slds-col slds-size_1-of-8">
@@ -53,6 +53,7 @@
                 </div>                
                 <div class="slds-col slds-size_1-of-3"></div>                
             </div>
+-->
         </lightning:card>  
     </div>  
 </aura:component>

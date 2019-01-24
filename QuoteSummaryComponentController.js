@@ -24,10 +24,15 @@
             
             if(component.isValid() && state==="SUCCESS") {
                 console.log("Quote create success " + response.getReturnValue());
-                component.set("v.coverageId", response.getReturnValue());
-//                var cvgEvent = component.getEvent("coverageEvent");
-//                cvgEvent.setParams({"componentId" : response.getReturnValue()});
-//                cvgEvent.fire();
+                var covgIds = response.getReturnValue();
+               for(var i = 0; i < covgIds.length; i++) {
+					console.log(covgIds[i]);
+                }
+                
+                var cvgEvent = component.getEvent("coverageEvent");
+                cvgEvent.setParams({"componentAction" : "review"})
+                cvgEvent.setParams({"coverageIDs" : covgIds});
+                cvgEvent.fire();
             } else if (state==="ERROR") {
                 console.log("problem when creating quote " + state);
             } else {

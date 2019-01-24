@@ -1,0 +1,5 @@
+<aura:event type="COMPONENT" access="global">
+    <aura:attribute name="componentAction" type="String" access="global"/>
+    <aura:attribute name="componentObject" type="Object" access="global"/>
+    <aura:attribute name="coverageIDs" type="ID[]" access="global"/>    
+</aura:event>

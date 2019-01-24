@@ -42,3 +42,4 @@
                                  				   drivingRecordId="{!v.newRecordId}"/>
     </div>
 </aura:component>
+

@@ -1,17 +1,74 @@
 <aura:component >
     <aura:attribute name="basicPlanId" type="ID"/>
     <aura:attribute name="premiumPlanId" type="ID"/>
+    <aura:attribute name="customPlanId" type="ID"/>
     <!--   <aura:handler name="coverageEvent" event="c:CoverageActionEvent" action="{!c.handleCoverageEvent}"/> -->
-      
-    <h1 class="slds-text-heading_small">Basic Coverage</h1>
-    <lightning:recordEditForm recordId="{!v.basicPlanId}" 
-                              objectApiName="Coverage__c"
-                              >
-        <div class="slds-box">
-            <lightning:outputField fieldName="Bodily_Injury_Liability__c" />
-            <lightning:outputField fieldName="Property_Damage_Liability__c" />
-            <lightning:outputField fieldName="Coverage_Rate__c"/>
+    
+    <div class="slds-grid slds-wrap slds-gutters slds-is-relative">
+        <div class="slds-col  slds-size_1-of-3">
+            <h1 class="slds-text-heading_medium">Basic Plan</h1>
+            <lightning:recordEditForm recordId="{!v.basicPlanId}" 
+                                      objectApiName="Coverage__c"
+                                      >
+                <div class="slds-box">
+                    <lightning:outputField fieldName="Bodily_Injury_Liability__c" />
+                    <lightning:outputField fieldName="Property_Damage_Liability__c" />
+                    <lightning:outputField fieldName="Personal_Injury_Protection__c"/>
+                    <lightning:outputField fieldName="Additional_Personal_Injury_Protection__c"/>
+                    <lightning:outputField fieldName="Uninsured_Motorist__c"/>
+                    <lightning:outputField fieldName="Comprehensive__c"/>
+                    <lightning:outputField fieldName="Collision__c"/>
+                    <lightning:outputField fieldName="Emergency_Road_Service__c"/>
+                    <lightning:outputField fieldName="Rental_Reimbursement__c"/><br/>
+                    <label style="font-size:20px; color:green" for="basicRate">Monthly Payment</label>
+                    <lightning:outputField aura:id="basicRate" fieldName="Coverage_Rate__c" variant="label-hidden"/>    
+                    <lightning:button name="basicQuote" onclick="" label="Buy Quote"/>
+                    
+                </div>
+            </lightning:recordEditForm>             
         </div>
-    </lightning:recordEditForm> 
+        <div class="slds-col slds-size_1-of-3">
+            <h1 class="slds-text-heading_medium">Premium Plan</h1>
+            <lightning:recordEditForm recordId="{!v.premiumPlanId}" 
+                                      objectApiName="Coverage__c"
+                                      >
+                <div class="slds-box">
+                    <lightning:outputField fieldName="Bodily_Injury_Liability__c" />
+                    <lightning:outputField fieldName="Property_Damage_Liability__c" />
+                    <lightning:outputField fieldName="Personal_Injury_Protection__c"/>
+                    <lightning:outputField fieldName="Additional_Personal_Injury_Protection__c"/>
+                    <lightning:outputField fieldName="Uninsured_Motorist__c"/>
+                    <lightning:outputField fieldName="Comprehensive__c"/>
+                    <lightning:outputField fieldName="Collision__c"/>
+                    <lightning:outputField fieldName="Emergency_Road_Service__c"/>
+                    <lightning:outputField fieldName="Rental_Reimbursement__c"/><br/>
+                    <label style="font-size:20px; color:green" for="premiumRate">Monthly Payment</label>                    
+                    <lightning:outputField aura:id="premiumRate" fieldName="Coverage_Rate__c" variant="label-hidden"/>                    
+                    <lightning:button name="preminumQuote" onclick="" label="Buy Quote"/>            
+                </div>
+            </lightning:recordEditForm>            
+        </div>
+        <div class="slds-col slds-size_1-of-3">
+            <h1 class="slds-text-heading_medium">Custom Plan</h1>
+            <lightning:recordEditForm recordId="{!v.customPlanId}" 
+                                      objectApiName="Coverage__c"
+                                      >
+                <div class="slds-box">
+                    <lightning:inputField fieldName="Bodily_Injury_Liability__c" />
+                    <lightning:inputField fieldName="Property_Damage_Liability__c" />
+                    <lightning:inputField fieldName="Personal_Injury_Protection__c"/>
+                    <lightning:inputField fieldName="Additional_Personal_Injury_Protection__c"/>
+                    <lightning:inputField fieldName="Uninsured_Motorist__c"/>
+                    <lightning:inputField fieldName="Comprehensive__c"/>
+                    <lightning:inputField fieldName="Collision__c"/>
+                    <lightning:inputField fieldName="Emergency_Road_Service__c"/>
+                    <lightning:inputField fieldName="Rental_Reimbursement__c"/> <br/>
+                    <label style="font-size:20px; color:green" for="customizeRate">Monthly Payment</label>                    
+                    <lightning:outputField aura:id="customizeRate" fieldName="Coverage_Rate__c" variant="label-hidden"/>                    
+                    <lightning:button name="preminumQuote" onclick="" label="Buy Quote"/>            
+                </div>
+            </lightning:recordEditForm>
+        </div>
+    </div>    
     
 </aura:component>

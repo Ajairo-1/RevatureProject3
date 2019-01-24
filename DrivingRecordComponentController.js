@@ -2,12 +2,11 @@
     handleOnload : function(component, event, helper) {
         
     },
-    handleOnsubmit : function(componet, event) {
-        console.log('---> onsubmit');
+    handleOnsubmit : function(component, event) {
+        console.log('Driving Record---> onsubmit');
         event.preventDefault();
         var recui = event.getParam("recordUi");
         var fields = event.getParam("fields");
-        //        console.log("fields " + fields["FirstName"]);
         component.find("drivingRecordForm").submit(fields);
     },
     handleOnsuccess : function(component, event) {
@@ -17,7 +16,7 @@
             console.log("record is not null " + record.id);
             component.set("v.drivingRecordId", record.id);
         }
-        var cmpEvent = component.getEvent("driverEvent");
+        var cmpEvent = component.getEvent("drivingRecordEvent");
         cmpEvent.setParams({"componentAction" : "summary"});
         cmpEvent.setParams({"componentObject" : record});
         cmpEvent.fire();
@@ -27,7 +26,7 @@
     },
     goNext : function(component, event) {
         var cmpEvent = component.getEvent("drivingRecordEvent");
-        cmpEvent.setParams({"componentAction" : "summary"});
+        cmpEvent.setParams({"componentAction" : "review"});
         cmpEvent.fire();
     },
     goBack : function(component, event) {

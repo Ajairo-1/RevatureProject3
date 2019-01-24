@@ -32,9 +32,10 @@
                             <lightning:inputField fieldName="Gender__c" required="true"/>            
                         </div>                        
                         <div class="slds-col slds-size_1-of-4">
-                            <lightning:inputField fieldName="Email"/>            
+                            <lightning:inputField fieldName="Email" required="true"/>            
                         </div>                        
                         <div class="slds-col slds-size_1-of-1"></div>
+                        <!-- ¿get rid of the Driver's License and everywhere it's referenced? -->
                         <div class="slds-col slds-size_1-of-6">
                             <lightning:inputField fieldName="Driver_License__c"/>            
                         </div>
@@ -45,7 +46,7 @@
                             <lightning:inputField fieldName="Issued_State__c"/>            
                         </div>
                         <div class="slds-col slds-size_1-of-12">
-                            <lightning:inputField fieldName="Years_Driving__c"/>            
+                            <lightning:inputField fieldName="Years_Driving__c" required="true"/>            
                         </div>                        
                         <div class="slds-col slds-size_1-of-1"></div>                    
                         <div class="slds-col slds-size_1-of-3">
@@ -56,10 +57,10 @@
                             <lightning:inputField fieldName="MailingCity"/>            
                         </div> 
                         <div class="slds-col slds-size_1-of-8">
-                            <lightning:inputField fieldName="MailingState"/>            
+                            <lightning:inputField fieldName="MailingState" required="true"/>            
                         </div>
                         <div class="slds-col slds-size_1-of-8">
-                            <lightning:inputField fieldName="MailingPostalCode"/>            
+                            <lightning:inputField fieldName="MailingPostalCode" required="true"/>            
                         </div>
                         <div class="slds-col slds-size_1-of-1"></div>
                         <div class="slds-col slds-size_1-of-8">
@@ -69,7 +70,7 @@
                     <div class="slds-col"></div>                
                 </lightning:recordEditForm>
             </div> <br/>
-            
+    <!--        
             <div class="slds-grid slds-gutters">
                 <div class="slds-col">
                     <div class="slds-grid">
@@ -80,7 +81,7 @@
                     </div>
                 </div>
                 <div class="slds-col"></div>
-            </div> 
+            </div>  -->
         </lightning:card>  
     </div>
     

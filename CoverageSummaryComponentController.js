@@ -8,6 +8,6 @@
             component.set("v.basicPlanId", obj);
             //               component.set("v.driver", obj);
             console.log("after set attribute");
-        } 
+        }
     }
 })
