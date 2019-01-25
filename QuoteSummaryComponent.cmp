@@ -1,15 +1,15 @@
-<aura:component controller="QuoteWizardApexController">
+<aura:component controller="QuoteWizardApexController" implements="flexipage:availableForRecordHome,force:hasRecordId">
     <aura:attribute name="stateId" type="ID" default="a0M1U000000MSyqUAG"/>
     <aura:attribute name="driverId" type="ID" default="0031U000007BGsEQAW"/>
     <aura:attribute name="vehicleId" type="ID" default="a031U000004BkPpQAK"/>
     <aura:attribute name="drivingRecordId" type="ID" default="a0L1U000000MpuvUAC"/>
     
     <aura:registerEvent name="coverageEvent" type="c:QuoteActionEvent"/>    
-    
-    <!--    <p>{!v.stateId}</p>
+<!--    
+    <p>{!v.stateId}</p>
     <p>driverID is {!v.driverId}</p>
     <p>vehicleId is {!v.vehicleId}</p>
-    <p>{!v.drivingRecordId}</p>	-->
+    <p>{!v.drivingRecordId}</p> -->
     <div class="slds-p-bottom_large slds-p-left_large" >
         <!--        <aura:if isTrue="{!and(not(empty(v.driverId)), not(empty(v.vehicleId)))}"> -->
         <div class="slds-grid slds-grid_align-space">

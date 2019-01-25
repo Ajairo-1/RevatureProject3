@@ -1,8 +1,23 @@
-<aura:component >
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId">
     <aura:attribute name="basicPlanId" type="ID"/>
     <aura:attribute name="premiumPlanId" type="ID"/>
     <aura:attribute name="customPlanId" type="ID"/>
     <!--   <aura:handler name="coverageEvent" event="c:CoverageActionEvent" action="{!c.handleCoverageEvent}"/> -->
+    <!-- <aura:attribute name="paymentPlanId" type="ID"/> -->
+    
+    
+    <aura:attribute name="newPayment" type="Object"/>
+    <aura:attribute name="simpleNewPayment" type="Object"/>
+    <aura:attribute name="newPaymentError" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit1}"/>
+    
+    <force:recordData aura:id="paymentRecordCreator" 
+                      layoutType="FULL"
+                      targetRecord="{!v.newPayment}"
+                      targetFields="{!v.simpleNewPayment}"
+                      targetError="{!v.newPaymentError}" 
+                      />
+    
     
     <div class="slds-grid slds-wrap slds-gutters slds-is-relative">
         <div class="slds-col  slds-size_1-of-3">
@@ -19,10 +34,12 @@
                     <lightning:outputField fieldName="Comprehensive__c"/>
                     <lightning:outputField fieldName="Collision__c"/>
                     <lightning:outputField fieldName="Emergency_Road_Service__c"/>
-                    <lightning:outputField fieldName="Rental_Reimbursement__c"/><br/>
-                    <label style="font-size:20px; color:green" for="basicRate">Monthly Payment</label>
+                    <lightning:outputField fieldName="Rental_Reimbursement__c"/>
+                    
+                    <br/>
+                    <label style="font-size:20px; color:green" for="basicRate">Six Month Payment</label>
                     <lightning:outputField aura:id="basicRate" fieldName="Coverage_Rate__c" variant="label-hidden"/>    
-                    <lightning:button name="basicQuote" onclick="" label="Buy Quote"/>
+                    <lightning:button class="slds-button slds-button_brand" variant="brand" name="basicQuote" label="Buy Quote" onclick="{!c.openmodal}"  />
                     
                 </div>
             </lightning:recordEditForm>             
@@ -42,9 +59,9 @@
                     <lightning:outputField fieldName="Collision__c"/>
                     <lightning:outputField fieldName="Emergency_Road_Service__c"/>
                     <lightning:outputField fieldName="Rental_Reimbursement__c"/><br/>
-                    <label style="font-size:20px; color:green" for="premiumRate">Monthly Payment</label>                    
+                    <label style="font-size:20px; color:green" for="premiumRate">Six Month Payment</label>                    
                     <lightning:outputField aura:id="premiumRate" fieldName="Coverage_Rate__c" variant="label-hidden"/>                    
-                    <lightning:button name="preminumQuote" onclick="" label="Buy Quote"/>            
+                    <lightning:button name="preminumQuote" label="Buy Quote" variant="brand" onclick="{!c.openmodal}" />            
                 </div>
             </lightning:recordEditForm>            
         </div>
@@ -63,12 +80,70 @@
                     <lightning:inputField fieldName="Collision__c"/>
                     <lightning:inputField fieldName="Emergency_Road_Service__c"/>
                     <lightning:inputField fieldName="Rental_Reimbursement__c"/> <br/>
-                    <label style="font-size:20px; color:green" for="customizeRate">Monthly Payment</label>                    
+                    <label style="font-size:20px; color:green" for="customizeRate"> Six Month Payment</label>                    
                     <lightning:outputField aura:id="customizeRate" fieldName="Coverage_Rate__c" variant="label-hidden"/>                    
-                    <lightning:button name="preminumQuote" onclick="" label="Buy Quote"/>            
+                    <lightning:button name="preminumQuote" label="Buy Quote" variant="brand" onclick="{!c.openmodal}"/>            
                 </div>
             </lightning:recordEditForm>
         </div>
     </div>    
+    
+    <div role="dialog" tabindex="-1" aria-labelledby="header43" aura:id="Modalbox" class="slds-modal">
+        <div class="slds-modal__container">
+            <div class="slds-modal__header">
+                <h2 id="header43" class="slds-text-heading--medium">Make Payment</h2>
+            </div>
+            <div class="slds-modal__content slds-p-around--medium">
+                
+                <div class="slds-grid slds-grid_verti" >
+                    <div class="slds-col">
+                        <span>
+                            
+                            <lightning:input aura:id="paymentField" label="Card Name" value="{!v.simpleNewPayment.Card_Name__c}" required="true"/>
+                            <lightning:input aura:id="paymentField" label="Card Number" value="{!v.simpleNewPayment.Card_Number__c}" required="true"/>
+                            <lightning:input aura:id="paymentField" label="Expiration Month" value="{!v.simpleNewPayment.Expiration_Month1__c}" required="true"/>
+                            <lightning:input aura:id="paymentField" label="Expiration Year" value="{!v.simpleNewPayment.Expiration_Year1__c}" required="true"/>
+                            <lightning:input aura:id="paymentField" label="Security Code" value="{!v.simpleNewPayment.Security_Code__c}" required="true"/>
+                            <lightning:input aura:id="paymentField" label="Zip Code" value="{!v.simpleNewPayment.Zip_Code__c}" required="true"/>
+                            
+                            
+                            
+                            <!--    <lightning:recordEditForm recordId="{!v.paymentPlanId}" 
+                                                      objectApiName="Payment__c"
+                                                      >
+                                <div class="slds-box">
+                                    <lightning:inputField fieldName="Card_Name__c" />
+                                    <lightning:inputField fieldName="Card_Number__c" />
+                                    <lightning:inputField fieldName="Expiration_Month__c"/>
+                                    <lightning:inputField fieldName="Expiration_Year__c"/>
+                                    <lightning:inputField fieldName="Security_Code__c"/>
+                                    <lightning:inputField fieldName="Zip_Code__c"/>
+                           <lightning:button aura:id="submit" onclick="{!c.makePayment}" label="Submit" class="slds-m-top_medium" />
+                                </div>
+                            </lightning:recordEditForm> -->
+                            
+                            
+                            <br/>
+                            <div class="slds-grid slds-gutters">
+                                <div class="slds-col">
+                                    <span>
+                                        <lightning:button label="Cancel" title="close" variant="brand" onclick="{!c.closeModal}" />
+                                    </span>
+                                </div>
+                                <div class="slds-m-right_none">
+                                    <div class="slds-col right-align">
+                                        <lightning:button label="Continue" variant="brand" onclick="{!c.makePayment}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-modal__footer">
+            </div>
+        </div>
+    </div>
+    <div class="slds-backdrop " aura:id="Modalbackdrop"></div>
     
 </aura:component>
