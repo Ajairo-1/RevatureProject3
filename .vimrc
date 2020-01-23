@@ -26,33 +26,33 @@ filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+"call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+"Plugin 'VundleVim/Vundle.vim'
 
 "DELETE IF SOMETHING WEIRD HAPPENS-------------------------
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
+"Plugin 'tpope/vim-fugitive'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
+"Plugin 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
-Plugin 'file:///home/gmarik/path/to/plugin'
+"Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Install L9 and avoid a Naming conflict if you've already installed a
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
+"call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
@@ -66,6 +66,12 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 "DELETE IF SOMETHING WEIRD HAPPENS-------------------------
+"
+
+:map \p i(<Esc>$a)<Esc>
+:map \c i[<Esc>ea]<Esc>
+"above added 12/20 14:44
+
 
 set autoindent
 set autoread                                                 " reload files when changed on disk, i.e. via `git checkout`
@@ -95,116 +101,122 @@ set wildmode=longest,list,full
 set hlsearch
 set relativenumber
 
+command! WipeReg for i in range(34,122) | silent! call setreg(nr2char(i), []) | endfor
 
 " Enable basic mouse behavior such as resizing buffers.
 set mouse=a
 if exists('$TMUX')  " Support resizing in tmux
   set ttymouse=xterm2
-endif
+  endif
 
-" keyboard shortcuts
-let mapleader = ','
-imap ;so System.out.println();<left><left>
-inoremap jk <esc>
-inoremap JK <esc>
-nmap ,n <c-w><c-w>
-nmap mn <c-b>
-nmap mm <c-f>
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
-noremap <leader>l :Align
-nnoremap <leader>a :Ag<space>
-nnoremap <leader>b :CtrlPBuffer<CR>
-nnoremap <leader>d :NERDTreeToggle<CR>
-nnoremap <leader>f :NERDTreeFind<CR>
-nnoremap <leader>s :wq<Enter>
-noremap <leader>t :CtrlP<CR>
-nnoremap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>
-nnoremap <leader>] :TagbarToggle<CR>
-nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
-nnoremap <leader>g :GitGutterToggle<CR>
-nnoremap <PageUp> l;
-nnoremap <PageUp> ;l
-noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+  " keyboard shortcuts
+  let mapleader = ','
+  imap ;so System.out.println();<left><left>
+  imap ;sd system.debug();<left><left>
+  inoremap jk <esc>
+  inoremap JK <esc>
+  nmap ,n <c-w><c-w>
+  nmap mn <c-b>
+  nmap mm <c-f>
+  noremap <C-h> <C-w>h
+  noremap <C-j> <C-w>j
+  noremap <C-k> <C-w>k
+  noremap <C-l> <C-w>l
+  noremap <leader>l :Align
+  nnoremap <leader>a :Ag<space>
+  nnoremap <leader>b :CtrlPBuffer<CR>
+  nnoremap <leader>d "_d
+  "nnoremap <leader>d :NERDTreeToggle<CR>
+  nnoremap <leader>f :NERDTreeFind<CR>
+  nnoremap <leader>Q :q!<Enter>
+  nnoremap <leader>q :wq<Enter>
+  nnoremap <leader>w :w<Enter>
+  noremap <leader>t :CtrlP<CR>
+  nnoremap <leader>x "_x
+  nnoremap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>
+  nnoremap <leader>] :TagbarToggle<CR>
+  nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
+  nnoremap <leader>g :GitGutterToggle<CR>
+  nnoremap <PageUp> l;
+  nnoremap <PageUp> ;l
+  noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
-" in case you forgot to sudo
-cnoremap w!! %!sudo tee > /dev/null %
+  " in case you forgot to sudo
+  cnoremap w!! %!sudo tee > /dev/null %
 
-" to fix indentation use 
-"  gg=G
+  " to fix indentation use 
+  "  gg=G
 
-" plugin settings
-let g:ctrlp_match_window = 'order:ttb,max:20'
-let g:NERDSpaceDelims=1
-let g:gitgutter_enabled = 0
+  " plugin settings
+  let g:ctrlp_match_window = 'order:ttb,max:20'
+  let g:NERDSpaceDelims=1
+  let g:gitgutter_enabled = 0
 
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
+  " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+  if executable('ag')
+    " Use Ag over Grep
+      set grepprg=ag\ --nogroup\ --nocolor
 
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
+        " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+	  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+	  endif
 
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-autocmd FileType c set omnifunc=ccomplete#Complete
+	  autocmd FileType python set omnifunc=pythoncomplete#Complete
+	  autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+	  autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+	  autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+	  autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+	  autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+	  autocmd FileType c set omnifunc=ccomplete#Complete
 
-augroup columnLimit
-  autocmd!
-  autocmd BufEnter,WinEnter
-        \ highlight ColumnLimit ctermbg=DarkGrey guibg=DarkGrey
-  let columnLimit = 79 " feel free to customize
-  let pattern =
-        \ '\%<' . (columnLimit+1) . 'v.\%>' . columnLimit . 'v'
-  autocmd BufEnter,WinEnter
-        \ let w:m1=matchadd('ColumnLimit', pattern, -1)
-augroup END
+	  augroup columnLimit
+	    autocmd!
+	      autocmd BufEnter,WinEnter
+	              \ highlight ColumnLimit ctermbg=DarkGrey guibg=DarkGrey
+		        let columnLimit = 79 " feel free to customize
+			  let pattern =
+			          \ '\%<' . (columnLimit+1) . 'v.\%>' . columnLimit . 'v'
+				    autocmd BufEnter,WinEnter
+				            \ let w:m1=matchadd('ColumnLimit', pattern, -1)
+					    augroup END
 
 
-" fdoc is yaml
-autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
-" md is markdown
-autocmd BufRead,BufNewFile *.md set filetype=markdown
-autocmd BufRead,BufNewFile *.md set spell
-" extra rails.vim heliddp
-autocmd User Rails silent! Rnavcommand decorator      app/decorators            -glob=**/* -suffix=_decorator.rb
-autocmd User Rails silent! Rnavcommand observer       app/observers             -glob=**/* -suffix=_observer.rb
-autocmd User Rails silent! Rnavcommand feature        features                  -glob=**/* -suffix=.feature
-autocmd User Rails silent! Rnavcommand job            app/jobs                  -glob=**/* -suffix=_job.rb
-autocmd User Rails silent! Rnavcommand mediator       app/mediators             -glob=**/* -suffix=_mediator.rb
-autocmd User Rails silent! Rnavcommand stepdefinition features/step_definitions -glob=**/* -suffix=_steps.rb
-" automatically rebalance windows on vim resize
-autocmd VimResized * :wincmd =dffaaddaaddaaddvvaa::wwqq
-" Fix Cursor in TMUX
-if exists('$TMUX')
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
+					    " fdoc is yaml
+					    autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
+					    " md is markdown
+					    autocmd BufRead,BufNewFile *.md set filetype=markdown
+					    autocmd BufRead,BufNewFile *.md set spell
+					    " extra rails.vim heliddp
+					    autocmd User Rails silent! Rnavcommand decorator      app/decorators            -glob=**/* -suffix=_decorator.rb
+					    autocmd User Rails silent! Rnavcommand observer       app/observers             -glob=**/* -suffix=_observer.rb
+					    autocmd User Rails silent! Rnavcommand feature        features                  -glob=**/* -suffix=.feature
+					    autocmd User Rails silent! Rnavcommand job            app/jobs                  -glob=**/* -suffix=_job.rb
+					    autocmd User Rails silent! Rnavcommand mediator       app/mediators             -glob=**/* -suffix=_mediator.rb
+					    autocmd User Rails silent! Rnavcommand stepdefinition features/step_definitions -glob=**/* -suffix=_steps.rb
+					    " automatically rebalance windows on vim resize
+					    autocmd VimResized * :wincmd =dffaaddaaddaaddvvaa::wwqq
+					    " Fix Cursor in TMUX
+					    if exists('$TMUX')
+					      let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+					        let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+						else
+						  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+						    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+						    endif
 
-" Don't copy the contents of an overwritten selection.
-vnoremap p "_dP
+						    " Don't copy the contents of an overwritten selection.
+						    vnoremap p "_dP
 
-" Go crazy!
-if filereadable(expand("~/.vimrc.local"))
-  " In your .vimrc.local, you might like:
-  "
-  " set autowrite
-  " set nocursorline
-  " set nowritebackup
-  " set whichwrap+=<,>,h,l,[,] " Wrap arrow keys between lines
-  "
-  " autocmd! bufwritepost .vimrc source ~/.vimrc
-  " noremap! jj <ESC>
-  source ~/.vimrc.local
-endif
+						    " Go crazy!
+						    if filereadable(expand("~/.vimrc.local"))
+						      " In your .vimrc.local, you might like:
+						        "
+							  " set autowrite
+							    " set nocursorline
+							      " set nowritebackup
+							        " set whichwrap+=<,>,h,l,[,] " Wrap arrow keys between lines
+								  "
+								    " autocmd! bufwritepost .vimrc source ~/.vimrc
+								      " noremap! jj <ESC>
+								        source ~/.vimrc.local
+									endif
